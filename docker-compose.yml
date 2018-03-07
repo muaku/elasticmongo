@@ -1,0 +1,34 @@
+version: "3"
+services:
+  mongo1:
+    hostname: mongo1
+    container_name: mongo1
+    image: mongo:3.4
+    ports:
+      - "27017:27017"
+    command: --replSet monsticset
+  mongo2:
+    hostname: mongo2
+    container_name: mongo2
+    image: mongo:3.4
+    ports:
+      - "27019:27017"
+    command: --replSet monsticset
+  mongo3:
+    hostname: mongo3
+    container_name: mongo3
+    image: mongo:3.4
+    ports:
+      - "27018:27017"
+    command: --replSet monsticset
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.8
+    hostname: elasticsearch
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+  mongoconnector:
+    build: .
+    restart: always
+    hostname: mongoconnector
+    container_name: mongoconnector

@@ -1,0 +1,21 @@
+{
+  "mainAddress": "mongo1:27017",
+  "oplogFile": "/var/log/mongo-connector/oplog.timestamp",
+  "verbosity": 1,
+  "logging": {
+    "type": "file",
+    "filename": "/var/log/mongo-connector/mongo-connector.log",
+    "__rotationWhen": "D",
+    "__rotationInterval": 1,
+    "__rotationBackups": 10
+  },
+  "namespaces": {
+
+  },
+  "docManagers": [
+    {
+      "docManager": "elastic2_doc_manager",
+      "targetURL": "elastic:changeme@elasticsearch:9200"
+    }
+  ]
+}
