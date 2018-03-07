@@ -4,6 +4,8 @@ services:
     hostname: mongo1
     container_name: mongo1
     image: mongo:3.4
+    networks:
+      - elastic-mongo-network
     ports:
       - "27017:27017"
     command: --replSet monsticset
@@ -11,6 +13,8 @@ services:
     hostname: mongo2
     container_name: mongo2
     image: mongo:3.4
+    networks:
+      - elastic-mongo-network
     ports:
       - "27019:27017"
     command: --replSet monsticset
@@ -18,17 +22,24 @@ services:
     hostname: mongo3
     container_name: mongo3
     image: mongo:3.4
+    networks:
+      - elastic-mongo-network
     ports:
       - "27018:27017"
     command: --replSet monsticset
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.6.8
+    networks:
+      - elastic-mongo-network
     hostname: elasticsearch
     container_name: elasticsearch
     ports:
       - "9200:9200"
   mongoconnector:
     build: .
-    restart: always
+    networks:
+      - elastic-mongo-network
     hostname: mongoconnector
     container_name: mongoconnector
+networks:
+  elastic-mongo-network:
